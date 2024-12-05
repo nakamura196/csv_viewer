@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+    />
+    <style>
+      /* テーブル全体 */
+      table.dataTable {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #e5e7eb; /* Tailwindのgray-200 */
+      }
+
+      /* ヘッダー */
+      table.dataTable thead th {
+        background-color: #f9fafb; /* Tailwindのgray-50 */
+        color: #374151; /* Tailwindのgray-700 */
+        text-align: left;
+        padding: 0.5rem;
+        font-size: 0.875rem; /* Tailwindのtext-sm */
+        font-weight: 500; /* Tailwindのfont-medium */
+      }
+
+      /* ボディ */
+      table.dataTable tbody td {
+        padding: 0.5rem;
+        font-size: 0.875rem; /* Tailwindのtext-sm */
+        color: #374151; /* Tailwindのgray-700 */
+      }
+
+      /* 行のホバー */
+      table.dataTable tbody tr:hover {
+        background-color: #f3f4f6; /* Tailwindのgray-100 */
+      }
+
+      /* ページネーションボタン */
+      .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.25rem 0.5rem;
+        margin: 0 0.25rem;
+        border: 1px solid #e5e7eb; /* Tailwindのgray-200 */
+        border-radius: 0.375rem; /* Tailwindのrounded-lg */
+        color: #374151; /* Tailwindのgray-700 */
+        background-color: white;
+        font-size: 0.875rem; /* Tailwindのtext-sm */
+        transition: all 0.2s;
+      }
+
+      /* ページネーションボタンホバー */
+      .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: #f9fafb; /* Tailwindのgray-50 */
+        border-color: #d1d5db; /* Tailwindのgray-300 */
+      }
+
+      /* ページネーションのアクティブ */
+      .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background-color: #6366f1; /* Tailwindのindigo-600 */
+        color: white;
+        border-color: #6366f1;
+      }
+
+      .dataTables_filter {
+        margin-bottom: 1rem; /* 検索フォームの下にスペースを追加 */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center">
+    <div class="w-full bg-white rounded-lg shadow-lg p-6 m-4">
+      <h1 class="text-2xl font-bold mb-4 text-gray-800">CSV Viewer</h1>
+      <div class="mb-4">
+        <label for="csvUrl" class="block text-sm font-medium text-gray-700"
+          >CSV URL</label
+        >
+        <input
+          type="text"
+          id="csvUrl"
+          placeholder="Enter CSV file URL or use ?u= in URL"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
+      <button
+        id="loadCsv"
+        class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      >
+        Load CSV
+      </button>
+      <div id="csvTableContainer" class="mt-6 overflow-x-auto">
+        <table
+          id="csvTable"
+          class="min-w-full divide-y divide-gray-200 table-auto border-collapse border border-gray-300"
+        >
+          <thead class="bg-gray-50">
+            <tr id="tableHead"></tr>
+          </thead>
+          <tbody
+            id="tableBody"
+            class="bg-white divide-y divide-gray-200"
+          ></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function getCsvUrlFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("u");
+      }
+
+      function loadCsv(csvUrl) {
+        if (!csvUrl) {
+          alert("Please enter a valid CSV URL.");
+          return;
+        }
+
+        Papa.parse(csvUrl, {
+          download: true,
+          header: true, // ヘッダーを解析
+          skipEmptyLines: true, // 空行をスキップ
+          complete: (results) => {
+            const data = results.data; // データ行
+            const keys = Object.keys(data[0] || {}); // ヘッダーキー
+
+            // データを整形
+            const formattedData = data.map((row) =>
+              keys.map((key) => row[key])
+            );
+
+            // DataTablesの初期化
+            $("#csvTable").DataTable({
+              destroy: true, // 再初期化
+              paging: true,
+              searching: true,
+              info: true,
+              responsive: true,
+              order: [[0, "asc"]],
+              data: formattedData, // DataTablesが期待する形式
+              columns: keys.map((key) => ({ title: key })), // ヘッダーを設定
+            });
+          },
+          error: (error) => {
+            alert("Failed to load CSV: " + error.message);
+          },
+        });
+      }
+
+      document.getElementById("loadCsv").addEventListener("click", () => {
+        const csvUrl = document.getElementById("csvUrl").value;
+        if (!csvUrl) {
+          alert("Please enter a valid CSV URL.");
+          return;
+        }
+        // 現在のURLに `?u=` パラメータを付加してリロード
+        const newUrl = `${window.location.origin}${
+          window.location.pathname
+        }?u=${encodeURIComponent(csvUrl)}`;
+        window.location.href = newUrl;
+      });
+
+      const csvUrlFromQuery = getCsvUrlFromQuery();
+      if (csvUrlFromQuery) {
+        document.getElementById("csvUrl").value = csvUrlFromQuery;
+        loadCsv(csvUrlFromQuery);
+      }
+    </script>
+  </body>
+</html>
