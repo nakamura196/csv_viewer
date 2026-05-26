@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="6" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.35"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative dots pattern -->
+  <g fill="#ffffff" fill-opacity="0.06">
+    <circle cx="80" cy="80" r="3"/>
+    <circle cx="160" cy="80" r="3"/>
+    <circle cx="240" cy="80" r="3"/>
+    <circle cx="80" cy="160" r="3"/>
+    <circle cx="160" cy="160" r="3"/>
+    <circle cx="1120" cy="550" r="3"/>
+    <circle cx="1040" cy="550" r="3"/>
+    <circle cx="960" cy="550" r="3"/>
+    <circle cx="1120" cy="470" r="3"/>
+    <circle cx="1040" cy="470" r="3"/>
+  </g>
+
+  <!-- Large background CSV grid (decorative) -->
+  <g opacity="0.10" transform="translate(720, 110)">
+    <rect x="0" y="0" width="440" height="410" rx="16" fill="#ffffff"/>
+    <!-- header row -->
+    <rect x="0" y="0" width="440" height="60" fill="#1e3a8a" opacity="0.6"/>
+    <line x1="110" y1="0" x2="110" y2="410" stroke="#1e3a8a" stroke-width="2"/>
+    <line x1="220" y1="0" x2="220" y2="410" stroke="#1e3a8a" stroke-width="2"/>
+    <line x1="330" y1="0" x2="330" y2="410" stroke="#1e3a8a" stroke-width="2"/>
+    <line x1="0" y1="60" x2="440" y2="60" stroke="#1e3a8a" stroke-width="2"/>
+    <line x1="0" y1="130" x2="440" y2="130" stroke="#1e3a8a" stroke-width="1.5"/>
+    <line x1="0" y1="200" x2="440" y2="200" stroke="#1e3a8a" stroke-width="1.5"/>
+    <line x1="0" y1="270" x2="440" y2="270" stroke="#1e3a8a" stroke-width="1.5"/>
+    <line x1="0" y1="340" x2="440" y2="340" stroke="#1e3a8a" stroke-width="1.5"/>
+  </g>
+
+  <!-- Logo badge -->
+  <g transform="translate(80, 120)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="120" height="120" rx="24" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="2"/>
+    <!-- table icon -->
+    <g transform="translate(22, 24)" stroke="#ffffff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="0" y="0" width="76" height="72" rx="6"/>
+      <line x1="0" y1="22" x2="76" y2="22"/>
+      <line x1="0" y1="46" x2="76" y2="46"/>
+      <line x1="26" y1="0" x2="26" y2="72"/>
+      <line x1="52" y1="0" x2="52" y2="72"/>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="80" y="330" font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="104" font-weight="800" fill="#ffffff" letter-spacing="-2">CSV Viewer</text>
+
+  <!-- Subtitle (Japanese) -->
+  <text x="82" y="400" font-family="-apple-system, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="34" font-weight="500" fill="#ffffff" fill-opacity="0.92">URL 指定で CSV を読み込み、表として閲覧</text>
+
+  <!-- Subtitle (English) -->
+  <text x="82" y="448" font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#ffffff" fill-opacity="0.75">Lightweight CSV viewer — load by URL, view as a table</text>
+
+  <!-- Code hint chip -->
+  <g transform="translate(80, 490)">
+    <rect x="0" y="0" width="380" height="56" rx="12" fill="#000000" fill-opacity="0.28" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="22" y="37" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="22" fill="#ffffff" fill-opacity="0.95">?u=&lt;CSV URL&gt;</text>
+  </g>
+
+  <!-- Footer URL -->
+  <text x="80" y="590" font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="500" fill="#ffffff" fill-opacity="0.7">nakamura196.github.io/csv_viewer</text>
+
+  <!-- Top-right brand tag -->
+  <g transform="translate(1020, 60)">
+    <rect x="0" y="0" width="120" height="40" rx="20" fill="#ffffff" fill-opacity="0.15" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="60" y="27" font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">OSS</text>
+  </g>
+</svg>

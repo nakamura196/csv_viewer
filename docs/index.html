@@ -8,6 +8,49 @@
       name="description"
       content="URL 指定で CSV を読み込み、表として閲覧する軽量ビューア。"
     />
+    <meta name="author" content="nakamura196" />
+    <meta name="theme-color" content="#2563eb" />
+    <link rel="canonical" href="https://nakamura196.github.io/csv_viewer/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CSV Viewer" />
+    <meta property="og:title" content="CSV Viewer" />
+    <meta
+      property="og:description"
+      content="URL 指定で CSV を読み込み、表として閲覧する軽量ビューア。"
+    />
+    <meta property="og:url" content="https://nakamura196.github.io/csv_viewer/" />
+    <meta
+      property="og:image"
+      content="https://nakamura196.github.io/csv_viewer/ogp.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CSV Viewer" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CSV Viewer" />
+    <meta
+      name="twitter:description"
+      content="URL 指定で CSV を読み込み、表として閲覧する軽量ビューア。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://nakamura196.github.io/csv_viewer/ogp.png"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0619D6ER0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G0619D6ER0');
+    </script>
 
     <!-- 機能ライブラリ(CSV パーサ + テーブル) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -31,6 +74,28 @@
       <div class="ds-header__inner">
         <a class="ds-header__brand" href="./">CSV Viewer</a>
         <div class="ds-header__actions">
+          <div
+            class="ds-lang-switch"
+            role="group"
+            aria-label="Language"
+            data-i18n-aria-label="langSwitchLabel"
+            style="display: inline-flex; gap: 0.25rem; margin-right: 0.75rem;"
+          >
+            <button
+              type="button"
+              data-lang-btn="ja"
+              style="background: transparent; border: 1px solid currentColor; border-radius: 4px; padding: 0.15rem 0.5rem; font: inherit; color: inherit; cursor: pointer; opacity: 0.6;"
+            >
+              JA
+            </button>
+            <button
+              type="button"
+              data-lang-btn="en"
+              style="background: transparent; border: 1px solid currentColor; border-radius: 4px; padding: 0.15rem 0.5rem; font: inherit; color: inherit; cursor: pointer; opacity: 0.6;"
+            >
+              EN
+            </button>
+          </div>
           <nav class="ds-header__nav">
             <a
               class="ds-header__nav-link"
@@ -46,33 +111,59 @@
 
     <main class="ds-container ds-section">
       <h1 class="ds-h1">CSV Viewer</h1>
-      <p class="ds-lead">
+      <p class="ds-lead" data-i18n-html="lead">
         CSV ファイルの URL を指定して、ブラウザ上で表として閲覧できます。
         URL クエリ <code>?u=&lt;CSV URL&gt;</code> 付きでアクセスすると、自動で読み込みます。
       </p>
 
+      <section
+        id="newsSection"
+        class="ds-card"
+        aria-labelledby="news-heading"
+        style="margin-bottom: 1.5rem; border-left: 4px solid #2563eb;"
+      >
+        <h2 id="news-heading" class="ds-card__title" data-i18n="newsTitle">
+          お知らせ
+        </h2>
+        <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; line-height: 1.7;">
+          <li>
+            <strong>2026-05-26</strong>
+            <span data-i18n="news1">
+              — 多言語対応(日本語 / 英語)と新しいデザインシステムを適用しました。
+            </span>
+          </li>
+          <li>
+            <strong>2024-12-06</strong>
+            <span data-i18n="news0">
+              — CSV Viewer を公開しました。
+            </span>
+          </li>
+        </ul>
+      </section>
+
       <section class="ds-card" aria-labelledby="csv-loader-heading">
-        <h2 id="csv-loader-heading" class="ds-card__title">CSV を読み込む</h2>
+        <h2 id="csv-loader-heading" class="ds-card__title" data-i18n="cardTitle">CSV を読み込む</h2>
 
         <div class="ds-form-row">
           <div class="ds-field">
-            <label class="ds-label" for="csvUrl">CSV URL</label>
+            <label class="ds-label" for="csvUrl" data-i18n="inputLabel">CSV URL</label>
             <input
               type="text"
               id="csvUrl"
               class="ds-input"
               placeholder="https://example.com/data.csv"
+              data-i18n-placeholder="inputPlaceholder"
               autocomplete="url"
               inputmode="url"
             />
           </div>
-          <button id="loadCsv" class="ds-btn" type="button">Load CSV</button>
+          <button id="loadCsv" class="ds-btn" type="button" data-i18n="loadButton">Load CSV</button>
         </div>
 
         <div id="csvError" class="ds-error" hidden></div>
 
         <p class="ds-muted" style="margin-top: 1rem; font-size: 0.875rem;">
-          サンプル:
+          <span data-i18n="sampleLabel">サンプル:</span>
           <a
             href="?u=https%3A%2F%2Fraw.githubusercontent.com%2Fomeka-j%2FOmeka-S-module-BulkImport-Sample-Data%2Frefs%2Fheads%2Fmain%2Fitem.csv"
             >Omeka S BulkImport item.csv</a
@@ -89,7 +180,7 @@
           >
           <br />
           <small style="color: #6b7280;">
-            出典:
+            <span data-i18n="sourceLabel">出典:</span>
             <a
               href="https://github.com/omeka-j/Omeka-S-module-BulkImport-Sample-Data"
               target="_blank"
@@ -114,7 +205,7 @@
         </p>
       </section>
 
-      <section class="ds-table-wrap" aria-label="CSV テーブル">
+      <section class="ds-table-wrap" data-i18n-aria-label="tableAriaLabel" aria-label="CSV テーブル">
         <table id="csvTable" class="display" style="width: 100%">
           <thead>
             <tr id="tableHead"></tr>
@@ -129,12 +220,12 @@
         <div class="ds-footer__grid">
           <div>
             <p class="ds-footer__brand">CSV Viewer</p>
-            <p class="ds-footer__brand-desc">
+            <p class="ds-footer__brand-desc" data-i18n="footerBrandDesc">
               URL ベースで CSV を読み込んでブラウザ上で閲覧する軽量ビューア。
             </p>
           </div>
           <div class="ds-footer__col">
-            <h2 class="ds-footer__heading">関連リンク</h2>
+            <h2 class="ds-footer__heading" data-i18n="footerHeading">関連リンク</h2>
             <ul class="ds-footer__list">
               <li>
                 <a
@@ -142,6 +233,7 @@
                   href="https://github.com/nakamura196/csv_viewer"
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-i18n="footerGithub"
                   >GitHub リポジトリ</a
                 >
               </li>
@@ -153,9 +245,139 @@
     </footer>
 
     <script>
+      // ---------- i18n ----------
+      const SUPPORTED_LANGS = ["ja", "en"];
+      const LANG_STORAGE_KEY = "csvViewerLang";
+
+      const I18N = {
+        ja: {
+          title: "CSV Viewer",
+          metaDescription:
+            "URL 指定で CSV を読み込み、表として閲覧する軽量ビューア。",
+          lead:
+            "CSV ファイルの URL を指定して、ブラウザ上で表として閲覧できます。 URL クエリ <code>?u=&lt;CSV URL&gt;</code> 付きでアクセスすると、自動で読み込みます。",
+          newsTitle: "お知らせ",
+          news0: "— CSV Viewer を公開しました。",
+          news1: "— 多言語対応(日本語 / 英語)と新しいデザインシステムを適用しました。",
+          cardTitle: "CSV を読み込む",
+          inputLabel: "CSV の URL",
+          inputPlaceholder: "https://example.com/data.csv",
+          loadButton: "読み込む",
+          langSwitchLabel: "言語",
+          sampleLabel: "サンプル:",
+          sourceLabel: "出典:",
+          tableAriaLabel: "CSV テーブル",
+          footerBrandDesc:
+            "URL ベースで CSV を読み込んでブラウザ上で閲覧する軽量ビューア。",
+          footerHeading: "関連リンク",
+          footerGithub: "GitHub リポジトリ",
+          errUrlRequired: "CSV の URL を入力してください。",
+          errLoadFailed: "CSV の読み込みに失敗しました: ",
+          dt: {
+            search: "検索:",
+            lengthMenu: "_MENU_ 件表示",
+            info: "_START_ - _END_ / _TOTAL_ 件",
+            infoEmpty: "0 件",
+            infoFiltered: "(全 _MAX_ 件から絞り込み)",
+            emptyTable: "データがありません",
+            zeroRecords: "該当するレコードがありません",
+            loadingRecords: "読み込み中...",
+            processing: "処理中...",
+            paginate: { first: "先頭", previous: "前", next: "次", last: "末尾" },
+          },
+        },
+        en: {
+          title: "CSV Viewer",
+          metaDescription:
+            "Lightweight viewer that loads CSV files by URL and displays them as a table.",
+          lead:
+            'Enter the URL of a CSV file to view it as a table in your browser. Append <code>?u=&lt;CSV URL&gt;</code> to the page URL to load it automatically.',
+          newsTitle: "Announcements",
+          news0: "— CSV Viewer was released.",
+          news1: "— Added multilingual support (Japanese / English) and applied a new design system.",
+          cardTitle: "Load a CSV",
+          inputLabel: "CSV URL",
+          inputPlaceholder: "https://example.com/data.csv",
+          loadButton: "Load CSV",
+          langSwitchLabel: "Language",
+          sampleLabel: "Samples:",
+          sourceLabel: "Source:",
+          tableAriaLabel: "CSV table",
+          footerBrandDesc:
+            "Lightweight viewer that loads CSV files by URL.",
+          footerHeading: "Links",
+          footerGithub: "GitHub repository",
+          errUrlRequired: "Please enter a CSV URL.",
+          errLoadFailed: "Failed to load CSV: ",
+          dt: {}, // English is DataTables' default
+        },
+      };
+
+      function detectLang() {
+        const qs = new URLSearchParams(window.location.search).get("lang");
+        if (qs && SUPPORTED_LANGS.includes(qs)) return qs;
+        try {
+          const stored = localStorage.getItem(LANG_STORAGE_KEY);
+          if (stored && SUPPORTED_LANGS.includes(stored)) return stored;
+        } catch (_) {}
+        const nav = (navigator.language || "ja").slice(0, 2).toLowerCase();
+        return SUPPORTED_LANGS.includes(nav) ? nav : "ja";
+      }
+
+      let currentLang = detectLang();
+
+      function t(key) {
+        return (I18N[currentLang] && I18N[currentLang][key]) || I18N.ja[key];
+      }
+
+      function applyI18n(lang) {
+        const dict = I18N[lang] || I18N.ja;
+        document.documentElement.lang = lang;
+        document.title = dict.title;
+        const md = document.querySelector('meta[name="description"]');
+        if (md) md.setAttribute("content", dict.metaDescription);
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const v = dict[el.dataset.i18n];
+          if (v != null) el.textContent = v;
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          const v = dict[el.dataset.i18nHtml];
+          if (v != null) el.innerHTML = v;
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const v = dict[el.dataset.i18nPlaceholder];
+          if (v != null) el.placeholder = v;
+        });
+        document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+          const v = dict[el.dataset.i18nAriaLabel];
+          if (v != null) el.setAttribute("aria-label", v);
+        });
+
+        document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
+          const active = btn.dataset.langBtn === lang;
+          btn.style.opacity = active ? "1" : "0.6";
+          btn.style.fontWeight = active ? "700" : "400";
+          btn.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+      }
+
+      function setLang(lang) {
+        if (!SUPPORTED_LANGS.includes(lang) || lang === currentLang) return;
+        currentLang = lang;
+        try {
+          localStorage.setItem(LANG_STORAGE_KEY, lang);
+        } catch (_) {}
+        const url = new URL(window.location.href);
+        url.searchParams.set("lang", lang);
+        window.history.replaceState({}, "", url);
+        applyI18n(lang);
+        if (lastTableResult) renderTable(lastTableResult);
+      }
+
+      // ---------- CSV loading ----------
       function getCsvUrlFromQuery() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get("u");
+        return new URLSearchParams(window.location.search).get("u");
       }
 
       function showError(msg) {
@@ -170,9 +392,25 @@
         el.hidden = true;
       }
 
+      let lastTableResult = null;
+
+      function renderTable({ keys, data }) {
+        $("#csvTable").DataTable({
+          destroy: true,
+          paging: true,
+          searching: true,
+          info: true,
+          scrollX: true,
+          order: [[0, "asc"]],
+          data: data,
+          columns: keys.map((key) => ({ title: key })),
+          language: I18N[currentLang].dt || {},
+        });
+      }
+
       function loadCsv(csvUrl) {
         if (!csvUrl) {
-          showError("CSV の URL を入力してください。");
+          showError(t("errUrlRequired"));
           return;
         }
         clearError();
@@ -182,39 +420,34 @@
           header: true,
           skipEmptyLines: true,
           complete: (results) => {
-            const data = results.data;
-            const keys = Object.keys(data[0] || {});
-            const formattedData = data.map((row) => keys.map((key) => row[key]));
-
-            $("#csvTable").DataTable({
-              destroy: true,
-              paging: true,
-              searching: true,
-              info: true,
-              scrollX: true,
-              order: [[0, "asc"]],
-              data: formattedData,
-              columns: keys.map((key) => ({ title: key })),
-            });
+            const rows = results.data;
+            const keys = Object.keys(rows[0] || {});
+            const data = rows.map((row) => keys.map((k) => row[k]));
+            lastTableResult = { keys, data };
+            renderTable(lastTableResult);
           },
           error: (error) => {
-            showError("CSV の読み込みに失敗しました: " + error.message);
+            showError(t("errLoadFailed") + error.message);
           },
         });
       }
 
+      // ---------- wire up ----------
+      applyI18n(currentLang);
+
+      document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
+        btn.addEventListener("click", () => setLang(btn.dataset.langBtn));
+      });
+
       document.getElementById("loadCsv").addEventListener("click", () => {
         const csvUrl = document.getElementById("csvUrl").value.trim();
         if (!csvUrl) {
-          showError("CSV の URL を入力してください。");
+          showError(t("errUrlRequired"));
           return;
         }
-        const newUrl =
-          window.location.origin +
-          window.location.pathname +
-          "?u=" +
-          encodeURIComponent(csvUrl);
-        window.location.href = newUrl;
+        const url = new URL(window.location.href);
+        url.searchParams.set("u", csvUrl);
+        window.location.href = url.toString();
       });
 
       document.getElementById("csvUrl").addEventListener("keydown", (e) => {
@@ -226,6 +459,8 @@
       const csvUrlFromQuery = getCsvUrlFromQuery();
       if (csvUrlFromQuery) {
         document.getElementById("csvUrl").value = csvUrlFromQuery;
+        const news = document.getElementById("newsSection");
+        if (news) news.hidden = true;
         loadCsv(csvUrlFromQuery);
       }
     </script>
