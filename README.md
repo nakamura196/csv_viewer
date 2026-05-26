@@ -59,6 +59,18 @@ http://localhost:8000/docs/?u=https://example.com/sample.csv
 
 ---
 
+## Sample Data
+
+The viewer ships with three quick-load sample CSVs (visible under "サンプル:" on the page):
+
+| Label | Source | License |
+| --- | --- | --- |
+| Omeka S BulkImport `item.csv` | [omeka-j/Omeka-S-module-BulkImport-Sample-Data](https://github.com/omeka-j/Omeka-S-module-BulkImport-Sample-Data) | CC0-1.0 |
+| `iris.csv` | [mwaskom/seaborn-data](https://github.com/mwaskom/seaborn-data) | (per upstream) |
+| `titanic.csv` | [datasciencedojo/datasets](https://github.com/datasciencedojo/datasets) | (per upstream) |
+
+The Omeka S sample illustrates the Dublin Core column layout (`dcterms:title`, `dcterms:description`, ...) used by the BulkImport module — handy for previewing a CSV before importing it into Omeka S.
+
 ## Dependencies
 
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -96,9 +108,15 @@ You can deploy this project easily on GitHub Pages:
 
 ---
 
+## Contributing
+
+Bug reports, feature requests, and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+Bundled sample data is distributed under its own license — see [Sample Data](#sample-data) above.
 
 ---
 
