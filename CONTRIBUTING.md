@@ -39,3 +39,13 @@ If you add or change a sample CSV link in `docs/index.html`, please also update 
 ## License
 
 By contributing, you agree that your contributions will be licensed under the project's [MIT License](LICENSE).
+
+## Tests
+
+The site is served as-is from `docs/` by GitHub Pages at <https://csv.ldas.jp> (custom domain via `docs/CNAME`).
+No dependencies are needed.
+
+```
+npm test          # public URL settings + every in-site reference resolves to a file in docs/
+npm run test:live # after deploy: new host, assets, 404, and old github.io URLs redirect with path/query kept
+```
