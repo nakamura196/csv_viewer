@@ -11,7 +11,7 @@ A simple, responsive web-based CSV viewer that supports URL-based CSV loading, b
 
 ## Demo
 
-Check out the live demo [here](https://nakamura196.github.io/csv_viewer/).
+Check out the live demo [here](https://csv.ldas.jp/).
 
 ## Getting Started
 

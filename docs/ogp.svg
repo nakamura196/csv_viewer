@@ -84,7 +84,7 @@
   </g>
 
   <!-- Footer URL -->
-  <text x="80" y="590" font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="500" fill="#ffffff" fill-opacity="0.7">nakamura196.github.io/csv_viewer</text>
+  <text x="80" y="590" font-family="-apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="500" fill="#ffffff" fill-opacity="0.7">csv.ldas.jp</text>
 
   <!-- Top-right brand tag -->
   <g transform="translate(1020, 60)">

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://csv.ldas.jp/sitemap.xml
